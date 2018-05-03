@@ -1,14 +1,11 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db');
-const Workout = require('./workout');
-// const Routine_exercise = require('./routine_exercise');
+// const Workout = require('./workout');
+// const User = require('./user');
 
 const Routine = sequelize.define('routine', {
         routineName: {
             type: Sequelize.STRING
-        },
-        active: {
-            type: Sequelize.BOOLEAN
         },
         routineURL: {
             type: Sequelize.STRING
@@ -21,7 +18,7 @@ const Routine = sequelize.define('routine', {
     }
 );
 
-Routine.hasMany(Workout);
-// Routine.hasMany(Routine_exercise);
+// Routine.hasMany(Workout);
+// Routine.belongsToMany(User, {through: 'User_routine'});
 
 module.exports = Routine;

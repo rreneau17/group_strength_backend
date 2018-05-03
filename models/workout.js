@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db');
 const Actual = require('./actual');
 const Routine = require('./routine');
+// const User_routine = require('./user_routine');
 
 const Workout = sequelize.define('workout', {
         date: {
@@ -13,6 +14,7 @@ const Workout = sequelize.define('workout', {
 );
 
 Workout.hasMany(Actual);
-// Workout.belongsTo(Routine);
+Workout.belongsTo(Routine);
+
 
 module.exports = Workout;

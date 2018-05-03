@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db');
+// const Actual = require('./actual');
 // const Routine_exercise = require('./routine_exercise');
 
 const Exercise = sequelize.define('exercise', {
@@ -21,5 +22,6 @@ const Exercise = sequelize.define('exercise', {
 );
 
 // Exercise.hasMany(Routine_exercise);
+// Exercise.hasMany(Actual);
 
 module.exports = Exercise;
