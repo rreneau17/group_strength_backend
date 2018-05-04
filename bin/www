@@ -6,7 +6,12 @@
 
 var app = require('../app');
 var debug = require('debug')('gs-backend:server');
-var http = require('http');
+// var http = require('http');
+
+// var path = require('path')
+var fs = require('fs')
+// var express = require('express')
+var https = require('https')
 
 /**
  * Get port from environment and store in Express.
@@ -16,16 +21,22 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * incorporate SSL certificates
  */
 
-var server = http.createServer(app);
+var certOptions = {
+  key: fs.readFileSync(path.resolve(process.env.SSL_KEY_PATH)),
+  cert: fs.readFileSync(path.resolve(process.env.SSL_CRT_PATH))
+}
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Create secure HTTPS server and listen on provided port on all network interfaces.
  */
 
-server.listen(port);
+// var server = http.createServer(app);
+var server = https.createServer(certOptions, app).listen(port);
+
+// server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
