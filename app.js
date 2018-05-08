@@ -11,12 +11,14 @@ var users = require('./routes/users');
 var device = require('./routes/device');
 var results = require('./routes/results');
 var test = require('./routes/test');
+var setupAuth = require('./auth');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+setupAuth(app);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

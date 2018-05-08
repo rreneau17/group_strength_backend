@@ -12,12 +12,16 @@
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
     "express": "~4.15.5",
+    "express-session": "^1.15.6",
     "hbs": "~4.0.1",
     "morgan": "~1.9.0",
     "nodemon": "^1.17.3",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.37.6",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "session-file-store": "^1.2.0"
   }
 }

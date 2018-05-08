@@ -6,12 +6,12 @@
 
 var app = require('../app');
 var debug = require('debug')('gs-backend:server');
-// var http = require('http');
+var http = require('http');
 
-// var path = require('path')
-var fs = require('fs')
+var path = require('path');
+var fs = require('fs');
 // var express = require('express')
-var https = require('https')
+var https = require('https');
 
 /**
  * Get port from environment and store in Express.

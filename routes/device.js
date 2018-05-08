@@ -20,7 +20,7 @@ router.route('/')
         User_routine.findOne({
             where: {
                 active: true,
-                userId: 3 
+                userId: 1 
             }
         }).then(userRoutine => {
             // gather all exercise info for the routine
@@ -50,9 +50,10 @@ router.route('/')
                     }
                 })
                 let rtnResults = {
-                    userId: userRoutine.userId,
+                    userRoutineId: userRoutine.id,
+                    // userId: userRoutine.userId,
                     routineName: routines[0].routineName,
-                    routineId: routines[0].id,
+                    // routineId: routines[0].id,
                     exercises: exerciseArray
                 }  
                 
@@ -69,8 +70,8 @@ router.route('/')
         console.log(req.body);
         Workout.create({
         date: req.body.date,
-        routineId: req.body.routineId,
-        userId: req.body.userId
+        userRoutineId: req.body.userRoutineId,
+        // userId: req.body.userId
         }).then(workout => {
             req.body.actuals.forEach(actual => {
                 Actual.create({

@@ -8,9 +8,9 @@ const Actual = require('./models/actual');
 const User = require('./models/user');
 const User_routine = require('./models/user_routine');
 
-// Routine.sync();
-// Exercise.sync();
-// Routine_exercise.sync();
+// Routine.sync({force: true});
+// Exercise.sync({force: true});
+// Routine_exercise.sync({force: true});
 // Workout.sync({force: true});
 // Actual.sync({force: true});
 // User.sync({force: true});
