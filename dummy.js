@@ -14,4 +14,4 @@ const User_routine = require('./models/user_routine');
 // Workout.sync({force: true});
 // Actual.sync({force: true});
 // User.sync({force: true});
-// User_routine.sync({force: true});
+User_routine.sync({force: true});

@@ -12,6 +12,7 @@ var device = require('./routes/device');
 var results = require('./routes/results');
 var test = require('./routes/test');
 var setupAuth = require('./auth');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/users', users);
 app.use('/device', device);
 app.use('/results', results);
 app.use('/test', test);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db');
-// const Workout = require('./workout');
+const Workout = require('./workout');
 const User = require('./user');
 
 const Routine = sequelize.define('routine', {
@@ -26,7 +26,7 @@ const Routine = sequelize.define('routine', {
     }
 );
 
-// Routine.hasMany(Workout);
+Routine.hasMany(Workout);
 // Routine.belongsToMany(User, {through: 'User_routine'});
 // Routine.belongsTo(User_routine, {foreignKey: 'authorId', targetKey: 'userId'});
 

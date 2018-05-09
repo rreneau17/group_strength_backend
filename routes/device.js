@@ -50,8 +50,8 @@ router.route('/')
                     }
                 })
                 let rtnResults = {
-                    userRoutineId: userRoutine.id,
-                    // userId: userRoutine.userId,
+                    routineId: userRoutine.routineId,
+                    userId: userRoutine.userId,
                     routineName: routines[0].routineName,
                     // routineId: routines[0].id,
                     exercises: exerciseArray
@@ -70,7 +70,8 @@ router.route('/')
         console.log(req.body);
         Workout.create({
         date: req.body.date,
-        userRoutineId: req.body.userRoutineId,
+        routineId: req.body.routineId,
+        userId: req.body.userId,
         // userId: req.body.userId
         }).then(workout => {
             req.body.actuals.forEach(actual => {

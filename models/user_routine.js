@@ -6,11 +6,11 @@ const User = require('./user');
 
 const User_routine = sequelize.define('user_routine', {
         // forces new primary key
-        id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
+        // id: {
+        //     type: Sequelize.INTEGER,
+        //     primaryKey: true,
+        //     autoIncrement: true
+        // },
         active: {
             type: Sequelize.BOOLEAN
         },
