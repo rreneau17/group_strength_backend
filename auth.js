@@ -66,8 +66,7 @@ const setupAuth = (app) => {
 
         console.log('logged in from Facebook authentication');
         console.log(req.isAuthenticated());
-
-        res.redirect('/');
+        res.redirect('/results/' + req.user.id);
         }
     );
 }
