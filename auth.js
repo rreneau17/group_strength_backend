@@ -25,6 +25,10 @@ const setupAuth = (app) => {
             where: {
                 fbId: profile.id
             }
+            // defaults: {
+            //     email: profile.emails[0].value,
+            //     firstName: profile.name.givenName
+            // }
         }).then(result => {
             // `findOrCreate` returns an array
             // The actual user instance is the 0th element in the array

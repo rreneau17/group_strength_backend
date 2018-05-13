@@ -1,0 +1,51 @@
+{{!-- <h1>{{title}}</h1>
+<p>Welcome to {{title}}</p> --}}
+
+<!--
+    ####################################################
+    N A V B A R
+    ####################################################
+    -->
+    <!-- If you need sticky-top to work in lower versions of IE https://github.com/filamentgroup/fixed-sticky -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
+
+        <div class="navbar-toggler-right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <a class="navbar-brand" href="#">
+            <img src="/images/group_strength_logo.png" width="150" height="40" class="d-inline-block align-top" alt="">
+        </a>
+        
+        <div class="collapse navbar-collapse" id="navbar">
+            <nav class="nav d-flex flex-column flex-md-row w-100 justify-content-end">
+                <a class="flex-fill text-center text-light nav-link" href="#about">About</a>
+                <a class="flex-fill text-center text-light nav-link" href="#services">Services</a>
+                <a class="flex-fill text-center text-light nav-link" href="#contact">Contact</a>
+                <a class="flex-fill text-center text-light nav-link" data-toggle="modal" href="#myModal">Log In</a>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+            <a href="/login/facebook" class="btn btn-block btn-social btn-facebook">Sign in with Facebook <span class="fa fa-facebook"></span></a>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Want to Demo?<a href="#">Login as Guest</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
