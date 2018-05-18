@@ -1,5 +1,6 @@
 // require('dotenv').config();
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const session = require('express-session');
 const cookieparser = require('cookie-parser');
@@ -16,6 +17,28 @@ const setupAuth = (app) => {
         saveUninitialized: true
     }));
 
+    passport.use(new LocalStrategy(
+        {
+            usernameField: 'username',
+            passwordField: 'password',
+            passReqToCallback: true // allows the passing back of the entire request to the callback
+        }, (req, username, password, done) => {
+          User.findOne({ 
+                where: {
+                    username: username 
+                }
+            }).then(user => {
+                console.log('found user!!!!')
+                return done(null, user);
+            }).catch(err => {
+                console.log('error!!!!');
+                done(err, false);
+            })
+        }
+    ));
+                
+    
+
     passport.use(new FacebookStrategy({
         clientID: process.env.FB_CLIENT_ID,
         clientSecret: process.env.FB_CLIENT_SECRET,
@@ -24,20 +47,16 @@ const setupAuth = (app) => {
         User.findOrCreate({
             where: {
                 fbId: profile.id
+            },
+            defaults: {
+                // email: profile.emails[0].value
+                displayName: profile.displayName
             }
-            // defaults: {
-            //     email: profile.emails[0].value,
-            //     firstName: profile.name.givenName
-            // }
-        }).then(result => {
-            // `findOrCreate` returns an array
-            // The actual user instance is the 0th element in the array
-            let user = result[0];
-            return done(null, user);
-        }).catch (err => {
-            console.log('Error logging in.');
-            done(err, null);
-        })   
+        }).spread(user => {
+            console.log(profile);
+            done(null, user);
+        })
+        .catch(err => done(err, false))   
     }));
 
     passport.serializeUser(function (user, done) {
@@ -50,7 +69,13 @@ const setupAuth = (app) => {
         console.log('deserializing user session');
         console.log(id);
         done(null, id);
-    })
+    });
+
+    // passport.deserializeUser(function(id, done) {
+    //     User.findById(id).then(user => {
+    //         done(err, user);
+    //     });
+    // });
 
     app.use(passport.initialize());
     app.use(passport.session());
@@ -59,18 +84,29 @@ const setupAuth = (app) => {
     app.get('/logout', function(req, res, next) {
         console.log('logging out');
         req.logout();
+        req.session.destroy();
         res.redirect('/');
     });
 
     app.get('/facebook/auth',
         passport.authenticate('facebook', { failureRedirect: '/login' }),
         (req, res) => {
-        // if you don't have your own route handler after the passport.authenticate middleware
-        // then you get stuck in the infinite loop
+            // if you don't have your own route handler after the passport.authenticate middleware
+            // then you get stuck in the infinite loop
 
-        console.log('logged in from Facebook authentication');
-        console.log(req.isAuthenticated());
-        res.redirect('/results/' + req.user.id);
+            console.log('logged in from Facebook authentication');
+            console.log(req.isAuthenticated());
+            res.redirect('/results/' + req.user.id);
+        }
+    );
+
+    app.post('/login',
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/temp'
+        }), (req, res) => {
+            console.log(req.isAuthenticated());
+            console.log(req);
         }
     );
 }
