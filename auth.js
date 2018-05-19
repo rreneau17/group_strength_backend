@@ -32,7 +32,7 @@ const setupAuth = (app) => {
                 return done(null, user);
             }).catch(err => {
                 console.log('error!!!!');
-                done(err, false);
+                done(err);
             })
         }
     ));
@@ -65,17 +65,20 @@ const setupAuth = (app) => {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        console.log('deserializing user session');
-        console.log(id);
-        done(null, id);
-    });
-
-    // passport.deserializeUser(function(id, done) {
-    //     User.findById(id).then(user => {
-    //         done(err, user);
-    //     });
+    // passport.deserializeUser(function (id, done) {
+    //     console.log('deserializing user session');
+    //     console.log(id);
+    //     done(null, id);
     // });
+
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.findById(id).then(user =>{
+            done(null, user);
+        }).catch(err => {
+            done(err);
+        });
+    });
 
     app.use(passport.initialize());
     app.use(passport.session());
